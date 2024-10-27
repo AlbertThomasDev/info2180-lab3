@@ -7,12 +7,19 @@ document.addEventListener('DOMContentLoaded', function() {
         box.forEach((box,index) => {
             box.setAttribute("class", "square");
 
+            box.addEventListener('mouseover', function () {
+                box.classList.add('hover');
+                
+            });
+
+            box.addEventListener('mouseout', function () {
+                box.classList.remove('hover');
+                
+            });
+
             box.addEventListener('click', function () {
             
                 if (!state[index]) {
-                    
-                    
-
                     box.innerHTML = current_val;
                     state[index] = current_val;
                     
@@ -35,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         // document.getElementById("board").setAttribute("class", "square");
         
+    
         
     }
     game();
