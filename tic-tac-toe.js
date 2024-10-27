@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    state = ["", "", "", "", "", "", "", "", ""];
+    const state = ["", "", "", "", "", "", "", "", ""];
     current_val = "X";
-  
+    winnerfound = false;
 
     const win_com = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     
@@ -26,7 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
                 if (!state[index]) {
                     box.innerHTML = current_val;
-                    state[index] = current_val;
+                    if(state[index] == ""){
+                        state[index] = current_val;
+                    }
+                        
                     
                     if(current_val == "X"){
                         box.classList.add("square", "X");
@@ -47,17 +50,20 @@ document.addEventListener('DOMContentLoaded', function() {
                         // console.log(state[win_com[i][0]])
                         // console.log(state[win_com[i][1]])
                         // console.log(state[win_com[i][2]])
-                        
-                        if(state[win_com[i][0]] != "" && state[win_com[i][1]] != "" && state[win_com[i][2]] != ""){
-                            if(state[win_com[i][0]] == state[win_com[i][1]] && state[win_com[i][0]] == state[win_com[i][2]] && state[win_com[i][1]] == state[win_com[i][2]]){
-                                // console.log("Winner detected");
-                                // console.log("Congratulations! " + state[win_com[i][0]] + " is the Winner!");
-                                winner_msg = document.getElementById('status');
-                                winner_msg.innerHTML = "Congratulations! " + state[win_com[i][0]] + " is the Winner!";
-                                winner_msg.classList.add("#status","you-won");
-                                break;
+                        if(winnerfound != true){
+                            if(state[win_com[i][0]] != "" && state[win_com[i][1]] != "" && state[win_com[i][2]] != ""){
+                                if(state[win_com[i][0]] == state[win_com[i][1]] && state[win_com[i][0]] == state[win_com[i][2]] && state[win_com[i][1]] == state[win_com[i][2]]){
+                                    // console.log("Winner detected");
+                                    // console.log("Congratulations! " + state[win_com[i][0]] + " is the Winner!");
+                                    winner_msg = document.getElementById('status');
+                                    winner_msg.innerHTML = "Congratulations! " + state[win_com[i][0]] + " is the Winner!";
+                                    winner_msg.classList.add("#status","you-won");
+                                    winnerfound = true;
+                                    break;
+                                }
                             }
                         }
+                        
                      
                     }
                     
